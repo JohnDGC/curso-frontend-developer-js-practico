@@ -3,7 +3,9 @@ const desktopMenu = document.querySelector('.desktop-menu');
 const shoppingCartMenu = document.querySelector('.navbar-shopping-cart');
 const burgerMenu = document.querySelector('.menu');
 const mobileMenu = document.querySelector('.mobile-menu');
-const aside = document.querySelector('.product-detail');
+const shoppingCartContainer = document.querySelector("#shoppingCartContainer");
+const productDetailContainer = document.querySelector("#productDetail");
+const productDetailCloseIcon = document.querySelector(".product-detail-close");
 const mainContainer = document.querySelector('.main-container');
 const cardsContainer = document.querySelector('.cards-container');
 
@@ -11,27 +13,30 @@ menuEmail.addEventListener('click', toggleDesktopMenu);
 burgerMenu.addEventListener('mouseover', toggleMobileMenu);
 shoppingCartMenu.addEventListener("click", toggleCartAside);
 mainContainer.addEventListener('click', closeMenusClick);
+productDetailCloseIcon.addEventListener('click', closeProductDetail);
 
 function toggleDesktopMenu() {
-  // const isAsideClosed = aside.classList.contains("inactive");
+  // const isAsideClosed = shoppingCartContainer.classList.contains("inactive");
 
   // if (!isAsideClosed) {
-  //   aside.classList.add("inactive");
+  //   shoppingCartContainer.classList.add("inactive");
   // }
 
   desktopMenu.classList.toggle('inactive');
-  aside.classList.add('inactive');
+  shoppingCartContainer.classList.add('inactive');
+  productDetailContainer.classList.add("inactive");
 }
 
 function toggleMobileMenu() {
-  // const isAsideClosed = aside.classList.contains("inactive");
+  // const isAsideClosed = shoppingCartContainer.classList.contains("inactive");
   
   // if (!isAsideClosed) {
-  //   aside.classList.add("inactive");
+  //   shoppingCartContainer.classList.add("inactive");
   // }
   
   mobileMenu.classList.toggle('inactive')
-  aside.classList.add('inactive');
+  shoppingCartContainer.classList.add('inactive');
+  productDetailContainer.classList.add("inactive");
 }
 
 function toggleCartAside() {
@@ -46,16 +51,33 @@ function toggleCartAside() {
   //   desktopMenu.classList.add('inactive');
   // }
   
-  aside.classList.toggle('inactive');
+  shoppingCartContainer.classList.toggle('inactive');
   desktopMenu.classList.add('inactive');
   mobileMenu.classList.add('inactive');
+  productDetailContainer.classList.add("inactive");
+
 }
 
-function closeMenusClick() {
-  aside.classList.add("inactive");
+// function toggleProductDetail() {
+//   productDetailContainer.classList.toggle('inactive');
+// }
+
+function openProductDetail() {
+  productDetailContainer.classList.remove('inactive');
+}
+function closeProductDetail() {
+  productDetailContainer.classList.add('inactive');
+  shoppingCartContainer.classList.add("inactive");
   desktopMenu.classList.add("inactive");
   mobileMenu.classList.add("inactive");
 }
+
+function closeMenusClick() {
+  shoppingCartContainer.classList.add("inactive");
+  desktopMenu.classList.add("inactive");
+  mobileMenu.classList.add("inactive");
+}
+
 
 const productList = []; //Array para devolver el código JS cuando se usa API. Por ahora es manual
 productList.push({
@@ -82,6 +104,8 @@ function renderProducts(arr) {
     //product = {name, price, image} ->product.image
     const productImg = document.createElement("img");
     productImg.setAttribute("src", product.image);
+    productImg.addEventListener('click', openProductDetail);
+    // productImg.addEventListener('click', toggleProductDetail);
 
     const productInfo = document.createElement("div");
     productInfo.classList.add("product-info");
