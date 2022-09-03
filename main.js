@@ -8,12 +8,14 @@ const productDetailContainer = document.querySelector("#productDetail");
 const productDetailCloseIcon = document.querySelector(".product-detail-close");
 const mainContainer = document.querySelector('.main-container');
 const cardsContainer = document.querySelector('.cards-container');
+const darken = document.querySelector('.darken');
 
 menuEmail.addEventListener('click', toggleDesktopMenu);
 burgerMenu.addEventListener('mouseover', toggleMobileMenu);
 shoppingCartMenu.addEventListener("click", toggleCartAside);
-mainContainer.addEventListener('click', closeMenusClick);
-productDetailCloseIcon.addEventListener('click', closeProductDetail);
+// mainContainer.addEventListener('click', closeMenusClick);
+productDetailCloseIcon.addEventListener('click', closeProductDetailIcon);
+darken.addEventListener('click', closeDarken);
 
 function toggleDesktopMenu() {
   // const isAsideClosed = shoppingCartContainer.classList.contains("inactive");
@@ -25,6 +27,7 @@ function toggleDesktopMenu() {
   desktopMenu.classList.toggle('inactive');
   shoppingCartContainer.classList.add('inactive');
   productDetailContainer.classList.add("inactive");
+  darken.classList.toggle('inactive');
 }
 
 function toggleMobileMenu() {
@@ -55,28 +58,35 @@ function toggleCartAside() {
   desktopMenu.classList.add('inactive');
   mobileMenu.classList.add('inactive');
   productDetailContainer.classList.add("inactive");
-
+  darken.classList.toggle("inactive");
 }
-
-// function toggleProductDetail() {
-//   productDetailContainer.classList.toggle('inactive');
-// }
 
 function openProductDetail() {
-  productDetailContainer.classList.remove('inactive');
+  productDetailContainer.classList.remove("inactive");
+  darken.classList.remove("inactive");
 }
-function closeProductDetail() {
-  productDetailContainer.classList.add('inactive');
+function closeProductDetailIcon() {
+  productDetailContainer.classList.add("inactive");
   shoppingCartContainer.classList.add("inactive");
   desktopMenu.classList.add("inactive");
   mobileMenu.classList.add("inactive");
+  darken.classList.add("inactive");
 }
 
-function closeMenusClick() {
+function closeDarken() {
   shoppingCartContainer.classList.add("inactive");
   desktopMenu.classList.add("inactive");
   mobileMenu.classList.add("inactive");
+  productDetailContainer.classList.add("inactive");
+  darken.classList.add("inactive");
+  
 }
+// function closeMenusClick() {
+//   shoppingCartContainer.classList.add("inactive");
+//   desktopMenu.classList.add("inactive");
+//   mobileMenu.classList.add("inactive");
+
+// }
 
 
 const productList = []; //Array para devolver el código JS cuando se usa API. Por ahora es manual
@@ -95,6 +105,22 @@ productList.push({
   price: 500,
   image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
 });
+productList.push({
+  name: 'PC',
+  price: 500,
+  image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+});
+productList.push({
+  name: 'PC',
+  price: 500,
+  image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+});
+productList.push({
+  name: 'PC',
+  price: 500,
+  image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+});
+
 //Creación de función
 function renderProducts(arr) {
   for (product of arr) {
