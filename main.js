@@ -13,7 +13,6 @@ const darken = document.querySelector('.darken');
 menuEmail.addEventListener('click', toggleDesktopMenu);
 burgerMenu.addEventListener('mouseover', toggleMobileMenu);
 shoppingCartMenu.addEventListener("click", toggleCartAside);
-// mainContainer.addEventListener('click', closeMenusClick);
 productDetailCloseIcon.addEventListener('click', closeProductDetailIcon);
 darken.addEventListener('click', closeDarken);
 
@@ -24,10 +23,11 @@ function toggleDesktopMenu() {
   //   shoppingCartContainer.classList.add("inactive");
   // }
 
-  desktopMenu.classList.toggle('inactive');
-  shoppingCartContainer.classList.add('inactive');
-  productDetailContainer.classList.add("inactive");
-  darken.classList.toggle('inactive');
+  // desktopMenu.classList.toggle('inactive');
+  desktopMenu.classList.toggle('show-desktop-menu');
+  shoppingCartContainer.classList.remove("show-aside");
+  productDetailContainer.classList.remove("show-aside");
+  darken.classList.toggle("show-darken");
 }
 
 function toggleMobileMenu() {
@@ -37,9 +37,10 @@ function toggleMobileMenu() {
   //   shoppingCartContainer.classList.add("inactive");
   // }
   
-  mobileMenu.classList.toggle('inactive')
-  shoppingCartContainer.classList.add('inactive');
-  productDetailContainer.classList.add("inactive");
+  // mobileMenu.classList.toggle('inactive')
+  mobileMenu.classList.toggle('show-mobile-menu')
+  shoppingCartContainer.classList.remove("show-aside");
+  productDetailContainer.classList.remove("show-aside");
 }
 
 function toggleCartAside() {
@@ -54,31 +55,34 @@ function toggleCartAside() {
   //   desktopMenu.classList.add('inactive');
   // }
   
-  shoppingCartContainer.classList.toggle('inactive');
-  desktopMenu.classList.add('inactive');
-  mobileMenu.classList.add('inactive');
-  productDetailContainer.classList.add("inactive");
-  darken.classList.toggle("inactive");
+  // shoppingCartContainer.classList.toggle('inactive');
+  shoppingCartContainer.classList.toggle('show-aside');
+  desktopMenu.classList.remove("show-desktop-menu");
+  mobileMenu.classList.remove("show-mobile-menu");
+  productDetailContainer.classList.remove("show-aside");
+  darken.classList.toggle("show-darken");
 }
 
 function openProductDetail() {
-  productDetailContainer.classList.remove("inactive");
-  darken.classList.remove("inactive");
+  productDetailContainer.classList.add("show-aside");
+  darken.classList.add("show-darken");
 }
+
+
 function closeProductDetailIcon() {
-  productDetailContainer.classList.add("inactive");
-  shoppingCartContainer.classList.add("inactive");
-  desktopMenu.classList.add("inactive");
-  mobileMenu.classList.add("inactive");
-  darken.classList.add("inactive");
+  productDetailContainer.classList.remove("show-aside");
+  shoppingCartContainer.classList.remove("show-aside");
+  desktopMenu.classList.remove("show-desktop-menu");
+  mobileMenu.classList.remove("show-mobile-menu");
+  darken.classList.remove("show-darken");
 }
 
 function closeDarken() {
-  shoppingCartContainer.classList.add("inactive");
-  desktopMenu.classList.add("inactive");
-  mobileMenu.classList.add("inactive");
-  productDetailContainer.classList.add("inactive");
-  darken.classList.add("inactive");
+  shoppingCartContainer.classList.remove("show-aside");
+  desktopMenu.classList.remove("show-desktop-menu");
+  mobileMenu.classList.remove("show-mobile-menu");
+  productDetailContainer.classList.remove("show-aside");
+  darken.classList.remove("show-darken");
   
 }
 // function closeMenusClick() {
@@ -87,7 +91,6 @@ function closeDarken() {
 //   mobileMenu.classList.add("inactive");
 
 // }
-
 
 const productList = []; //Array para devolver el código JS cuando se usa API. Por ahora es manual
 productList.push({
@@ -130,6 +133,7 @@ function renderProducts(arr) {
     //product = {name, price, image} ->product.image
     const productImg = document.createElement("img");
     productImg.setAttribute("src", product.image);
+    productImg.setAttribute("id", "imagen");
     productImg.addEventListener('click', openProductDetail);
     // productImg.addEventListener('click', toggleProductDetail);
 
